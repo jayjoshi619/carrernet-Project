@@ -34,7 +34,7 @@ app.get("/jobs/:id", (req, res) => {
 app.get("/health", (req, res) => {
   res.json({
     status: "OK",
-    project: "CareerConnect",
+    project: "CareerNet",
     team: ["Jay Joshi", "Ashish Anisetti", "Trung Hieu"]
   });
 });
@@ -44,5 +44,5 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`CareerConnect server running at http://localhost:${PORT}`);
+  console.log(`CareerNet server running at http://localhost:${PORT}`);
 });

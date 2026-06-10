@@ -1,7 +1,7 @@
-# CareerConnect – Job & Internship Portal
+# CareerNet – Job & Internship Portal
 
 ## Project Overview
-CareerConnect is a web-based Job & Internship Portal developed as part of the ITE5315 course project. The application provides a simple and efficient way for users to browse job opportunities, view job details, and search through a curated dataset of job postings. The project is built using Node.js and Express and uses a JSON dataset as its data source.
+CareerNet is a web-based Job & Internship Portal developed as part of the ITE5315 course project. The application provides a simple and efficient way for users to browse job opportunities, view job details, and search through a curated dataset of job postings. The project is built using Node.js and Express and uses a JSON dataset as its data source.
 
 ## Team Members
 * Ashish Anisetti
@@ -29,7 +29,7 @@ The project uses a cleaned job postings dataset containing 330 records. The data
 
 ## Project Structure
 ```
-careerconnect/
+CAREERNET/
 │
 ├── data/
 │   └── jobs.json

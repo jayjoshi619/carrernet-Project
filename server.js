@@ -17,7 +17,21 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/jobs", (req, res) => {
-  res.json(jobs);
+  const page = parseInt(req.query.page) || 1;
+  const perPage = parseInt(req.query.perPage) || 10;
+
+  const startIndex = (page - 1) * perPage;
+  const endIndex = startIndex + perPage;
+
+  const paginatedJobs = jobs.slice(startIndex, endIndex);
+
+  res.json({
+    page,
+    perPage,
+    totalJobs: jobs.length,
+    totalPages: Math.ceil(jobs.length / perPage),
+    data: paginatedJobs
+  });
 });
 
 app.get("/jobs/:id", (req, res) => {
@@ -31,16 +45,47 @@ app.get("/jobs/:id", (req, res) => {
   res.json(job);
 });
 
-app.get("/health", (req, res) => {
+app.get("/search", (req, res) => {
+  const keyword = (req.query.keyword || "").toLowerCase();
+
+  if (!keyword) {
+    return res.status(400).json({
+      error: "Please provide a keyword."
+    });
+  }
+
+  const results = jobs.filter(job =>
+    (job.title && job.title.toLowerCase().includes(keyword)) ||
+    (job.company?.name &&
+      job.company.name.toLowerCase().includes(keyword)) ||
+    (job.location?.city &&
+      job.location.city.toLowerCase().includes(keyword))
+  );
+
   res.json({
-    status: "OK",
-    project: "CareerNet",
-    team: ["Jay Joshi", "Ashish Anisetti", "Trung Hieu"]
+    keyword,
+    totalResults: results.length,
+    data: results
   });
 });
 
 app.use((req, res) => {
-  res.status(404).json({ error: "Route not found" });
+  res.status(404).json({
+    success: false,
+    message: "Route not found"
+  });
+});
+
+app.get("/health", (req, res) => {
+  res.json({
+    status: "Healthy",
+    project: "CareerConnect",
+    team: [
+      "Jay Joshi",
+      "Ashish Anisetti",
+      "Trung Hieu"
+    ]
+  });
 });
 
 app.listen(PORT, () => {

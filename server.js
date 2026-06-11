@@ -69,22 +69,22 @@ app.get("/search", (req, res) => {
   });
 });
 
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: "Route not found"
-  });
-});
-
 app.get("/health", (req, res) => {
   res.json({
     status: "Healthy",
-    project: "CareerConnect",
+    project: "CareerNet",
     team: [
       "Jay Joshi",
       "Ashish Anisetti",
       "Trung Hieu"
     ]
+  });
+});
+
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found"
   });
 });
 
